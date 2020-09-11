@@ -31,6 +31,8 @@
 - Windows Server 2012
 - Windows Server 2012 R2
 
+### เปิดโปรแกรม
+เปิดไฟล์ YulgangLogin.exe เพื่อเข้าใช้งาน
 ### หมายเหตุ
 ทำไมถึงขึ้นตามรายการด้านล่างนี้
 - Publisher : Unknown ในขณะที่เปิดโปรแกรม [(ตัวอย่าง)](https://i.imgur.com/peSlQDG.png "(ตัวอย่าง)")
