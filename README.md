@@ -15,7 +15,7 @@
 
 โปรแกรมนี้เขียนด้วยโปรแกรม Visual Studio 2017 และใช้ .NET Framework เวอร์ชั่น 4.6.1 เป็นอย่างต่ำ
 ### ดาวน์โหลด
-[Yulgang Login Version 2.0.0.0](+ "Yulgang Login Latest Version")
+[Yulgang Login Version 2.0.0.0](https://github.com/meawmuay/yulgang-login/releases/download/v2.0.0.0/Yulgang.Login.2.0.0.0.zip "Yulgang Login Latest Version")
 
 ### ติดตั้ง
 ตัวโปรแกรมไม่มีความจำเป็นต้องติด แต่หากคุณยังไม่ได้ลง .NET Framework เวอร์ชั่น 4.6.1 หรือมากกว่า ดาวน์โหลดได้จากลิงค์ด้านล่าง
