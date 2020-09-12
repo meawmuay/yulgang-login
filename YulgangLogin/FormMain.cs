@@ -190,22 +190,59 @@ namespace YulgangLogin
 
                         //Send key
                         InputSimulator input = new InputSimulator();
-                        input.Keyboard.TextEntry(user.Username);
+
+                        //setUser to textbox
+                        showUser.Text = user.Username;
+                        Clipboard.SetText(showUser.Text); //set text to clipBoard
+                        test1.Text = Clipboard.GetText();//get text from clipBoard
+
+
+                        //Copy and Paste Username
+                        input.Keyboard.KeyDown(VirtualKeyCode.CONTROL);
+                        input.Keyboard.Sleep(50);
+                        input.Keyboard.KeyDown(VirtualKeyCode.SHIFT);
+                        input.Keyboard.Sleep(50);
+                        input.Keyboard.KeyDown(VirtualKeyCode.INSERT);
+                        input.Keyboard.Sleep(50);
+                        input.Keyboard.KeyUp(VirtualKeyCode.CONTROL);
+                        input.Keyboard.Sleep(50);
+                        input.Keyboard.KeyUp(VirtualKeyCode.SHIFT);
+                        input.Keyboard.Sleep(50);
+                        input.Keyboard.KeyUp(VirtualKeyCode.INSERT);
+
                         //Send tab
-                        input.Keyboard.Sleep(200);
+                        input.Keyboard.Sleep(150);
                         input.Keyboard.KeyDown(VirtualKeyCode.TAB);
                         input.Keyboard.Sleep(150);
                         input.Keyboard.KeyUp(VirtualKeyCode.TAB);
+                        input.Keyboard.Sleep(150);
 
-                        input.Keyboard.Sleep(200);
-                        input.Keyboard.TextEntry(user.Password);
+                        //setPassword to textbox
+                        showPassword.Text = user.Password;
+                        Clipboard.SetText(showPassword.Text); //set text to clipBoard
+                        test2.Text = Clipboard.GetText();//get text from clipBoard
+                        input.Keyboard.Sleep(100);
+
+                        //Copy and Paste Username
+                        input.Keyboard.KeyDown(VirtualKeyCode.CONTROL);
+                        input.Keyboard.Sleep(50);
+                        input.Keyboard.KeyDown(VirtualKeyCode.SHIFT);
+                        input.Keyboard.Sleep(50);
+                        input.Keyboard.KeyDown(VirtualKeyCode.INSERT);
+                        input.Keyboard.Sleep(50);
+                        input.Keyboard.KeyUp(VirtualKeyCode.CONTROL);
+                        input.Keyboard.Sleep(50);
+                        input.Keyboard.KeyUp(VirtualKeyCode.SHIFT);
+                        input.Keyboard.Sleep(50);
+                        input.Keyboard.KeyUp(VirtualKeyCode.INSERT);
+                        //input.Keyboard.TextEntry(user.Password);
 
                         //Send enter login
                         Console.WriteLine(_loginEnter);
                         if( _loginEnter )
                         {
                             Console.WriteLine(@"Enter");
-                            input.Keyboard.Sleep(300);
+                            input.Keyboard.Sleep(200);
                             input.Keyboard.KeyPress(VirtualKeyCode.RETURN);
                         }
                     }
