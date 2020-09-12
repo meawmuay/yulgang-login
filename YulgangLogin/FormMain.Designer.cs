@@ -49,13 +49,15 @@
             this.ToolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialogExportDatabase = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialogImportDatabase = new System.Windows.Forms.OpenFileDialog();
+            this.comboBoxMode = new System.Windows.Forms.ComboBox();
+            this.ToolStripMenuItemUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonLogin
             // 
             this.buttonLogin.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.buttonLogin.Location = new System.Drawing.Point(341, 35);
+            this.buttonLogin.Location = new System.Drawing.Point(341, 62);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(118, 52);
             this.buttonLogin.TabIndex = 0;
@@ -71,7 +73,7 @@
             this.listViewLogin.HideSelection = false;
             this.listViewLogin.Location = new System.Drawing.Point(12, 35);
             this.listViewLogin.Name = "listViewLogin";
-            this.listViewLogin.Size = new System.Drawing.Size(316, 189);
+            this.listViewLogin.Size = new System.Drawing.Size(316, 163);
             this.listViewLogin.TabIndex = 1;
             this.listViewLogin.UseCompatibleStateImageBehavior = false;
             this.listViewLogin.View = System.Windows.Forms.View.Details;
@@ -85,9 +87,9 @@
             // buttonAdd
             // 
             this.buttonAdd.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.buttonAdd.Location = new System.Drawing.Point(341, 170);
+            this.buttonAdd.Location = new System.Drawing.Point(12, 204);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(118, 24);
+            this.buttonAdd.Size = new System.Drawing.Size(74, 24);
             this.buttonAdd.TabIndex = 2;
             this.buttonAdd.Text = "เพิ่ม";
             this.buttonAdd.UseVisualStyleBackColor = true;
@@ -96,9 +98,9 @@
             // buttonRemove
             // 
             this.buttonRemove.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.buttonRemove.Location = new System.Drawing.Point(403, 200);
+            this.buttonRemove.Location = new System.Drawing.Point(254, 204);
             this.buttonRemove.Name = "buttonRemove";
-            this.buttonRemove.Size = new System.Drawing.Size(56, 24);
+            this.buttonRemove.Size = new System.Drawing.Size(74, 24);
             this.buttonRemove.TabIndex = 3;
             this.buttonRemove.Text = "ลบ";
             this.buttonRemove.UseVisualStyleBackColor = true;
@@ -107,9 +109,9 @@
             // buttonEdit
             // 
             this.buttonEdit.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.buttonEdit.Location = new System.Drawing.Point(341, 200);
+            this.buttonEdit.Location = new System.Drawing.Point(92, 204);
             this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(56, 24);
+            this.buttonEdit.Size = new System.Drawing.Size(74, 24);
             this.buttonEdit.TabIndex = 4;
             this.buttonEdit.Text = "แก้ไข";
             this.buttonEdit.UseVisualStyleBackColor = true;
@@ -117,7 +119,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(341, 90);
+            this.buttonCancel.Location = new System.Drawing.Point(341, 119);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(118, 23);
             this.buttonCancel.TabIndex = 5;
@@ -137,7 +139,7 @@
             this.checkBoxLoginEnter.Checked = true;
             this.checkBoxLoginEnter.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxLoginEnter.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.checkBoxLoginEnter.Location = new System.Drawing.Point(345, 95);
+            this.checkBoxLoginEnter.Location = new System.Drawing.Point(345, 121);
             this.checkBoxLoginEnter.Name = "checkBoxLoginEnter";
             this.checkBoxLoginEnter.Size = new System.Drawing.Size(102, 18);
             this.checkBoxLoginEnter.TabIndex = 6;
@@ -151,7 +153,7 @@
             this.checkBoxChangeTitle.Checked = true;
             this.checkBoxChangeTitle.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxChangeTitle.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
-            this.checkBoxChangeTitle.Location = new System.Drawing.Point(345, 117);
+            this.checkBoxChangeTitle.Location = new System.Drawing.Point(345, 143);
             this.checkBoxChangeTitle.Name = "checkBoxChangeTitle";
             this.checkBoxChangeTitle.Size = new System.Drawing.Size(109, 18);
             this.checkBoxChangeTitle.TabIndex = 7;
@@ -163,7 +165,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.ToolStripMenuItemAbout});
+            this.ToolStripMenuItemAbout,
+            this.ToolStripMenuItemUpdate});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(471, 24);
@@ -185,28 +188,28 @@
             // MasterToolStripMenuItemChangePassword
             // 
             this.MasterToolStripMenuItemChangePassword.Name = "MasterToolStripMenuItemChangePassword";
-            this.MasterToolStripMenuItemChangePassword.Size = new System.Drawing.Size(180, 22);
+            this.MasterToolStripMenuItemChangePassword.Size = new System.Drawing.Size(167, 22);
             this.MasterToolStripMenuItemChangePassword.Text = "เปลี่ยนรหัส Master";
             this.MasterToolStripMenuItemChangePassword.Click += new System.EventHandler(this.MasterToolStripMenuItemChangePassword_Click);
             // 
             // ToolStripMenuItemExportDatabase
             // 
             this.ToolStripMenuItemExportDatabase.Name = "ToolStripMenuItemExportDatabase";
-            this.ToolStripMenuItemExportDatabase.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenuItemExportDatabase.Size = new System.Drawing.Size(167, 22);
             this.ToolStripMenuItemExportDatabase.Text = "ส่งออกฐานข้อมูล";
             this.ToolStripMenuItemExportDatabase.Click += new System.EventHandler(this.ToolStripMenuItemExportDatabase_Click);
             // 
             // ToolStripMenuItemImportDatabase
             // 
             this.ToolStripMenuItemImportDatabase.Name = "ToolStripMenuItemImportDatabase";
-            this.ToolStripMenuItemImportDatabase.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenuItemImportDatabase.Size = new System.Drawing.Size(167, 22);
             this.ToolStripMenuItemImportDatabase.Text = "นำเข้าฐานข้อมูล";
             this.ToolStripMenuItemImportDatabase.Click += new System.EventHandler(this.ToolStripMenuItemImportDatabase_Click);
             // 
             // ToolStripMenuItemClean
             // 
             this.ToolStripMenuItemClean.Name = "ToolStripMenuItemClean";
-            this.ToolStripMenuItemClean.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenuItemClean.Size = new System.Drawing.Size(167, 22);
             this.ToolStripMenuItemClean.Text = "ล้างข้อมูล";
             this.ToolStripMenuItemClean.Click += new System.EventHandler(this.ToolStripMenuItemClean_Click);
             // 
@@ -227,11 +230,33 @@
             this.openFileDialogImportDatabase.FileName = "YulgangLoginDB.db";
             this.openFileDialogImportDatabase.Filter = "DB|*.db";
             // 
+            // comboBoxMode
+            // 
+            this.comboBoxMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMode.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.comboBoxMode.FormattingEnabled = true;
+            this.comboBoxMode.Items.AddRange(new object[] {
+            "แบบพิมพ์",
+            "แบบคัดลอก"});
+            this.comboBoxMode.Location = new System.Drawing.Point(341, 35);
+            this.comboBoxMode.Name = "comboBoxMode";
+            this.comboBoxMode.Size = new System.Drawing.Size(118, 22);
+            this.comboBoxMode.TabIndex = 9;
+            this.comboBoxMode.SelectedIndexChanged += new System.EventHandler(this.comboBoxMode_SelectedIndexChanged);
+            // 
+            // ToolStripMenuItemUpdate
+            // 
+            this.ToolStripMenuItemUpdate.Name = "ToolStripMenuItemUpdate";
+            this.ToolStripMenuItemUpdate.Size = new System.Drawing.Size(52, 20);
+            this.ToolStripMenuItemUpdate.Text = "อัปเดต";
+            this.ToolStripMenuItemUpdate.Click += new System.EventHandler(this.ToolStripMenuItemUpdate_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(471, 235);
+            this.ClientSize = new System.Drawing.Size(471, 240);
+            this.Controls.Add(this.comboBoxMode);
             this.Controls.Add(this.checkBoxChangeTitle);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.checkBoxLoginEnter);
@@ -277,6 +302,8 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemAbout;
         private System.Windows.Forms.SaveFileDialog saveFileDialogExportDatabase;
         private System.Windows.Forms.OpenFileDialog openFileDialogImportDatabase;
+        private System.Windows.Forms.ComboBox comboBoxMode;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemUpdate;
     }
 }
 

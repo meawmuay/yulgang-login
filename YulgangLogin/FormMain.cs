@@ -21,6 +21,7 @@ namespace YulgangLogin
         private bool _startLogin = false;
         private bool _loginEnter = true;
         private bool _changeTitle = true;
+        private int _mode = 0;
         private int _loginSelected;
         public FormMain()
         {
@@ -51,7 +52,7 @@ namespace YulgangLogin
             listViewLogin.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             listViewLogin.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             listViewLogin.Columns.Add("ID", 0);
-            listViewLogin.Columns.Add("Title", 160);
+            listViewLogin.Columns.Add("Title", 140);
             listViewLogin.Columns.Add("Username", 150);
 
             //Load Users
@@ -61,11 +62,16 @@ namespace YulgangLogin
             buttonCancel.BringToFront();
 
             //Warning
-            if( !File.Exists(FormWarning.PathWarning()))
+            if( !File.Exists(FormWarning.PathWarning()) )
             {
                 FormWarning formWarning = new FormWarning();
                 formWarning.ShowDialog();
             }
+
+            //Setting
+            comboBoxMode.SelectedIndex = Properties.Settings.Default.mode;
+            checkBoxChangeTitle.Checked = Properties.Settings.Default.changeTitle;
+            checkBoxLoginEnter.Checked = Properties.Settings.Default.loginEnter;
         }
 
         public void ReloadLists()
@@ -190,22 +196,68 @@ namespace YulgangLogin
 
                         //Send key
                         InputSimulator input = new InputSimulator();
-                        input.Keyboard.TextEntry(user.Username);
-                        //Send tab
-                        input.Keyboard.Sleep(200);
-                        input.Keyboard.KeyDown(VirtualKeyCode.TAB);
-                        input.Keyboard.Sleep(150);
-                        input.Keyboard.KeyUp(VirtualKeyCode.TAB);
 
-                        input.Keyboard.Sleep(200);
-                        input.Keyboard.TextEntry(user.Password);
+                        Console.WriteLine(@"Mode = " + _mode.ToString());
+                        //Mode = 0; typing
+                        if (_mode == 0)
+                        {
+                            Console.WriteLine(@"use Typing");
+                            //Send username
+                            input.Keyboard.TextEntry(user.Username);
+                            //Send tab
+                            input.Keyboard.Sleep(200);
+                            input.Keyboard.KeyDown(VirtualKeyCode.TAB);
+                            input.Keyboard.Sleep(150);
+                            input.Keyboard.KeyUp(VirtualKeyCode.TAB);
+                            //Send password
+                            input.Keyboard.Sleep(200);
+                            input.Keyboard.TextEntry(user.Password);
+                        }else if (_mode == 1)
+                        {
+                            Console.WriteLine(@"use Copy");
+                            //Copy and Paste username
+                            Clipboard.SetText(user.Username);
+                            input.Keyboard.KeyDown(VirtualKeyCode.CONTROL);
+                            input.Keyboard.Sleep(50);
+                            input.Keyboard.KeyDown(VirtualKeyCode.SHIFT);
+                            input.Keyboard.Sleep(50);
+                            input.Keyboard.KeyDown(VirtualKeyCode.INSERT);
+                            input.Keyboard.Sleep(50);
+                            input.Keyboard.KeyUp(VirtualKeyCode.CONTROL);
+                            input.Keyboard.Sleep(50);
+                            input.Keyboard.KeyUp(VirtualKeyCode.SHIFT);
+                            input.Keyboard.Sleep(50);
+                            input.Keyboard.KeyUp(VirtualKeyCode.INSERT);
+
+                            //Send tab
+                            input.Keyboard.Sleep(150);
+                            input.Keyboard.KeyDown(VirtualKeyCode.TAB);
+                            input.Keyboard.Sleep(50);
+                            input.Keyboard.KeyUp(VirtualKeyCode.TAB);
+                            input.Keyboard.Sleep(100);
+
+                            //Copy and Paste password
+                            Clipboard.SetText(user.Password);
+                            input.Keyboard.KeyDown(VirtualKeyCode.CONTROL);
+                            input.Keyboard.Sleep(50);
+                            input.Keyboard.KeyDown(VirtualKeyCode.SHIFT);
+                            input.Keyboard.Sleep(50);
+                            input.Keyboard.KeyDown(VirtualKeyCode.INSERT);
+                            input.Keyboard.Sleep(50);
+                            input.Keyboard.KeyUp(VirtualKeyCode.CONTROL);
+                            input.Keyboard.Sleep(50);
+                            input.Keyboard.KeyUp(VirtualKeyCode.SHIFT);
+                            input.Keyboard.Sleep(50);
+                            input.Keyboard.KeyUp(VirtualKeyCode.INSERT);
+                        }
+
 
                         //Send enter login
                         Console.WriteLine(_loginEnter);
                         if( _loginEnter )
                         {
                             Console.WriteLine(@"Enter");
-                            input.Keyboard.Sleep(300);
+                            input.Keyboard.Sleep(250);
                             input.Keyboard.KeyPress(VirtualKeyCode.RETURN);
                         }
                     }
@@ -223,12 +275,18 @@ namespace YulgangLogin
         {
             _loginEnter = checkBoxLoginEnter.Checked;
             Console.WriteLine(_loginEnter);
+
+            Properties.Settings.Default["loginEnter"] = checkBoxLoginEnter.Checked;
+            Properties.Settings.Default.Save();
         }
 
         private void checkBoxChangeTitle_CheckedChanged(object sender, EventArgs e)
         {
             _changeTitle = checkBoxChangeTitle.Checked;
             Console.WriteLine(_changeTitle);
+
+            Properties.Settings.Default["changeTitle"] = checkBoxChangeTitle.Checked;
+            Properties.Settings.Default.Save();
         }
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -293,6 +351,18 @@ namespace YulgangLogin
                     Process.GetCurrentProcess().Kill();
                 }
             }
+        }
+
+        private void ToolStripMenuItemUpdate_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/meawmuay/yulgang-login");
+        }
+
+        private void comboBoxMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _mode = comboBoxMode.SelectedIndex;
+            Properties.Settings.Default["mode"] = comboBoxMode.SelectedIndex;
+            Properties.Settings.Default.Save();
         }
     }
 }
