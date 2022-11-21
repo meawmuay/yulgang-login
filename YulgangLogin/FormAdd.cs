@@ -25,6 +25,17 @@ namespace YulgangLogin
             }
         }
 
+        public FormAdd(FormMain frmMain,String title,String username,String password)
+        {
+            InitializeComponent();
+            FrmMain = frmMain;
+            textBoxTitle.Text = title;
+            textBoxUsername.Text = username;
+            textBoxPassword.Text = password;
+        }
+
+
+
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             User user = new User();

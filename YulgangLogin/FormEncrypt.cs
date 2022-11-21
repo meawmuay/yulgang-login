@@ -15,6 +15,7 @@ namespace YulgangLogin
     public partial class FormEncrypt : Form
     {
         private bool _hasPassword = false;
+
         public FormEncrypt()
         {
             InitializeComponent();

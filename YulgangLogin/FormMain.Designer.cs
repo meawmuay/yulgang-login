@@ -47,10 +47,11 @@
             this.ToolStripMenuItemImportDatabase = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemClean = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialogExportDatabase = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialogImportDatabase = new System.Windows.Forms.OpenFileDialog();
             this.comboBoxMode = new System.Windows.Forms.ComboBox();
-            this.ToolStripMenuItemUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonCoppy = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -181,44 +182,51 @@
             this.ToolStripMenuItemImportDatabase,
             this.ToolStripMenuItemClean});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
             this.fileToolStripMenuItem.Text = "ความปลอดภัย";
             this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
             // MasterToolStripMenuItemChangePassword
             // 
             this.MasterToolStripMenuItemChangePassword.Name = "MasterToolStripMenuItemChangePassword";
-            this.MasterToolStripMenuItemChangePassword.Size = new System.Drawing.Size(167, 22);
+            this.MasterToolStripMenuItemChangePassword.Size = new System.Drawing.Size(160, 22);
             this.MasterToolStripMenuItemChangePassword.Text = "เปลี่ยนรหัส Master";
             this.MasterToolStripMenuItemChangePassword.Click += new System.EventHandler(this.MasterToolStripMenuItemChangePassword_Click);
             // 
             // ToolStripMenuItemExportDatabase
             // 
             this.ToolStripMenuItemExportDatabase.Name = "ToolStripMenuItemExportDatabase";
-            this.ToolStripMenuItemExportDatabase.Size = new System.Drawing.Size(167, 22);
+            this.ToolStripMenuItemExportDatabase.Size = new System.Drawing.Size(160, 22);
             this.ToolStripMenuItemExportDatabase.Text = "ส่งออกฐานข้อมูล";
             this.ToolStripMenuItemExportDatabase.Click += new System.EventHandler(this.ToolStripMenuItemExportDatabase_Click);
             // 
             // ToolStripMenuItemImportDatabase
             // 
             this.ToolStripMenuItemImportDatabase.Name = "ToolStripMenuItemImportDatabase";
-            this.ToolStripMenuItemImportDatabase.Size = new System.Drawing.Size(167, 22);
+            this.ToolStripMenuItemImportDatabase.Size = new System.Drawing.Size(160, 22);
             this.ToolStripMenuItemImportDatabase.Text = "นำเข้าฐานข้อมูล";
             this.ToolStripMenuItemImportDatabase.Click += new System.EventHandler(this.ToolStripMenuItemImportDatabase_Click);
             // 
             // ToolStripMenuItemClean
             // 
             this.ToolStripMenuItemClean.Name = "ToolStripMenuItemClean";
-            this.ToolStripMenuItemClean.Size = new System.Drawing.Size(167, 22);
+            this.ToolStripMenuItemClean.Size = new System.Drawing.Size(160, 22);
             this.ToolStripMenuItemClean.Text = "ล้างข้อมูล";
             this.ToolStripMenuItemClean.Click += new System.EventHandler(this.ToolStripMenuItemClean_Click);
             // 
             // ToolStripMenuItemAbout
             // 
             this.ToolStripMenuItemAbout.Name = "ToolStripMenuItemAbout";
-            this.ToolStripMenuItemAbout.Size = new System.Drawing.Size(58, 20);
+            this.ToolStripMenuItemAbout.Size = new System.Drawing.Size(54, 20);
             this.ToolStripMenuItemAbout.Text = "เกี่ยวกับ";
             this.ToolStripMenuItemAbout.Click += new System.EventHandler(this.ToolStripMenuItemAbout_Click);
+            // 
+            // ToolStripMenuItemUpdate
+            // 
+            this.ToolStripMenuItemUpdate.Name = "ToolStripMenuItemUpdate";
+            this.ToolStripMenuItemUpdate.Size = new System.Drawing.Size(49, 20);
+            this.ToolStripMenuItemUpdate.Text = "อัปเดต";
+            this.ToolStripMenuItemUpdate.Click += new System.EventHandler(this.ToolStripMenuItemUpdate_Click);
             // 
             // saveFileDialogExportDatabase
             // 
@@ -244,18 +252,23 @@
             this.comboBoxMode.TabIndex = 9;
             this.comboBoxMode.SelectedIndexChanged += new System.EventHandler(this.comboBoxMode_SelectedIndexChanged);
             // 
-            // ToolStripMenuItemUpdate
+            // buttonCoppy
             // 
-            this.ToolStripMenuItemUpdate.Name = "ToolStripMenuItemUpdate";
-            this.ToolStripMenuItemUpdate.Size = new System.Drawing.Size(52, 20);
-            this.ToolStripMenuItemUpdate.Text = "อัปเดต";
-            this.ToolStripMenuItemUpdate.Click += new System.EventHandler(this.ToolStripMenuItemUpdate_Click);
+            this.buttonCoppy.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
+            this.buttonCoppy.Location = new System.Drawing.Point(172, 204);
+            this.buttonCoppy.Name = "buttonCoppy";
+            this.buttonCoppy.Size = new System.Drawing.Size(74, 24);
+            this.buttonCoppy.TabIndex = 10;
+            this.buttonCoppy.Text = "สำเนา";
+            this.buttonCoppy.UseVisualStyleBackColor = true;
+            this.buttonCoppy.Click += new System.EventHandler(this.buttonCoppy_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(471, 240);
+            this.Controls.Add(this.buttonCoppy);
             this.Controls.Add(this.comboBoxMode);
             this.Controls.Add(this.checkBoxChangeTitle);
             this.Controls.Add(this.menuStrip1);
@@ -271,6 +284,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "FormMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Yulgang Login";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.FormMain_Load);
@@ -304,6 +318,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialogImportDatabase;
         private System.Windows.Forms.ComboBox comboBoxMode;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemUpdate;
+        private System.Windows.Forms.Button buttonCoppy;
     }
 }
 

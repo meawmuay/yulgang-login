@@ -53,7 +53,7 @@
             this.label1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(222)));
             this.label1.Location = new System.Drawing.Point(12, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(129, 16);
+            this.label1.Size = new System.Drawing.Size(128, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "MASTER PASSWORD";
             // 
@@ -81,7 +81,7 @@
             // ToolStripMenuItemClean
             // 
             this.ToolStripMenuItemClean.Name = "ToolStripMenuItemClean";
-            this.ToolStripMenuItemClean.Size = new System.Drawing.Size(66, 20);
+            this.ToolStripMenuItemClean.Size = new System.Drawing.Size(61, 20);
             this.ToolStripMenuItemClean.Text = "ล้างข้อมูล";
             this.ToolStripMenuItemClean.Click += new System.EventHandler(this.ToolStripMenuItemClean_Click);
             // 
@@ -101,6 +101,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormEncrypt";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormEncrypt";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormEncrypt_FormClosing);

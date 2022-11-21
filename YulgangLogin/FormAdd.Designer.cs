@@ -120,6 +120,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormAdd";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "User";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.FormAdd_Load);

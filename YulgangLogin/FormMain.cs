@@ -33,8 +33,9 @@ namespace YulgangLogin
             //Check database file
             Database.Create();
 
+
             //Master Password
-            if( Database.CheckConnectionDefault() )
+            if (Database.CheckConnectionDefault())
             {
                 FormEncryptChangePassword formEncryptFirst = new FormEncryptChangePassword();
                 formEncryptFirst.ShowDialog();
@@ -62,7 +63,7 @@ namespace YulgangLogin
             buttonCancel.BringToFront();
 
             //Warning
-            if( !File.Exists(FormWarning.PathWarning()) )
+            if (!File.Exists(FormWarning.PathWarning()))
             {
                 FormWarning formWarning = new FormWarning();
                 formWarning.ShowDialog();
@@ -129,6 +130,7 @@ namespace YulgangLogin
                 ReloadLists();
             }
         }
+
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             StartLogin();
@@ -363,6 +365,36 @@ namespace YulgangLogin
             _mode = comboBoxMode.SelectedIndex;
             Properties.Settings.Default["mode"] = comboBoxMode.SelectedIndex;
             Properties.Settings.Default.Save();
+        }
+
+        private void buttonCoppy_Click(object sender, EventArgs e)
+        {
+            if (listViewLogin.SelectedItems.Count != 1)
+            {
+                MessageBox.Show(@"กรุณาเลือกรายการจากด้านซ้ายมือก่อน!", @"Alert", MessageBoxButtons.OK);
+                return;
+            }
+
+            coppyUser();
+
+        }
+
+
+        private void coppyUser() {
+
+
+            if (listViewLogin.SelectedItems.Count == 1)
+            {
+                int id = Convert.ToInt32(listViewLogin.SelectedItems[0].SubItems[0].Text);
+                User user = User.GetUserById(id);
+                if (user != null)
+                {
+                    FormAdd formAdd = new FormAdd(this, user.Title,user.Username,user.Password);
+                    formAdd.Show();
+                }
+
+                ReloadLists();
+            }
         }
     }
 }
