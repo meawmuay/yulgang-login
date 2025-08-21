@@ -173,102 +173,120 @@ namespace YulgangLogin
         private static extern int GetWindowText(System.IntPtr hWnd, System.Text.StringBuilder lpString, int cch);
         [System.Runtime.InteropServices.DllImport("user32")]
         private static extern int SetWindowText(System.IntPtr hWnd, string text);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
         private void timerLogin_Tick(object sender, EventArgs e)
         {
-            if( _startLogin )
+            if (_startLogin)
             {
-                System.Text.StringBuilder title = new System.Text.StringBuilder(256);
                 IntPtr hWnd = GetForegroundWindow();
-                GetWindowText(hWnd, title, title.Capacity);
-                if( title.ToString().StartsWith("YGOnline") )
+                uint processId;
+                GetWindowThreadProcessId(hWnd, out processId);
+                
+                Console.WriteLine( $"Process ID: {processId}");
+                
+                try
                 {
-                    StopLogin();
-
-                    //Load user
-                    User user = User.GetUserById(_loginSelected);
-                    if( user != null )
+                    // Get the process by ID
+                    Process process = Process.GetProcessById((int)processId);
+                    
+                    Console.WriteLine(process.ProcessName);
+        
+                    // Check if the process name matches "YGOnline"
+                    if (process.ProcessName.Equals("YGOnline", StringComparison.OrdinalIgnoreCase))
                     {
-                        //Change title
-                        if( _changeTitle )
+                        StopLogin();
+        
+                        //Load user
+                        User user = User.GetUserById(_loginSelected);
+                        if (user != null)
                         {
-                            SetWindowText(hWnd, "YGOnline - " + user.Title);
+                            //Change title
+                            if (_changeTitle)
+                            {
+                                SetWindowText(hWnd, user.Title);
+                            }
+        
+                            //Send key
+                            InputSimulator input = new InputSimulator();
+        
+                            Console.WriteLine(@"Mode = " + _mode.ToString());
+                            //Mode = 0; typing
+                            if (_mode == 0)
+                            {
+                                Console.WriteLine(@"use Typing");
+                                //Send username
+                                input.Keyboard.TextEntry(user.Username);
+                                //Send tab
+                                input.Keyboard.Sleep(200);
+                                input.Keyboard.KeyDown(VirtualKeyCode.TAB);
+                                input.Keyboard.Sleep(150);
+                                input.Keyboard.KeyUp(VirtualKeyCode.TAB);
+                                //Send password
+                                input.Keyboard.Sleep(200);
+                                input.Keyboard.TextEntry(user.Password);
+                            }
+                            else if (_mode == 1)
+                            {
+                                Console.WriteLine(@"use Copy");
+                                //Copy and Paste username
+                                Clipboard.SetText(user.Username);
+                                input.Keyboard.KeyDown(VirtualKeyCode.CONTROL);
+                                input.Keyboard.Sleep(50);
+                                input.Keyboard.KeyDown(VirtualKeyCode.SHIFT);
+                                input.Keyboard.Sleep(50);
+                                input.Keyboard.KeyDown(VirtualKeyCode.INSERT);
+                                input.Keyboard.Sleep(50);
+                                input.Keyboard.KeyUp(VirtualKeyCode.CONTROL);
+                                input.Keyboard.Sleep(50);
+                                input.Keyboard.KeyUp(VirtualKeyCode.SHIFT);
+                                input.Keyboard.Sleep(50);
+                                input.Keyboard.KeyUp(VirtualKeyCode.INSERT);
+        
+                                //Send tab
+                                input.Keyboard.Sleep(150);
+                                input.Keyboard.KeyDown(VirtualKeyCode.TAB);
+                                input.Keyboard.Sleep(50);
+                                input.Keyboard.KeyUp(VirtualKeyCode.TAB);
+                                input.Keyboard.Sleep(100);
+        
+                                //Copy and Paste password
+                                Clipboard.SetText(user.Password);
+                                input.Keyboard.KeyDown(VirtualKeyCode.CONTROL);
+                                input.Keyboard.Sleep(50);
+                                input.Keyboard.KeyDown(VirtualKeyCode.SHIFT);
+                                input.Keyboard.Sleep(50);
+                                input.Keyboard.KeyDown(VirtualKeyCode.INSERT);
+                                input.Keyboard.Sleep(50);
+                                input.Keyboard.KeyUp(VirtualKeyCode.CONTROL);
+                                input.Keyboard.Sleep(50);
+                                input.Keyboard.KeyUp(VirtualKeyCode.SHIFT);
+                                input.Keyboard.Sleep(50);
+                                input.Keyboard.KeyUp(VirtualKeyCode.INSERT);
+                            }
+        
+        
+                            //Send enter login
+                            Console.WriteLine(_loginEnter);
+                            if (_loginEnter)
+                            {
+                                Console.WriteLine(@"Enter");
+                                input.Keyboard.Sleep(250);
+                                input.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+                            }
                         }
-
-                        //Send key
-                        InputSimulator input = new InputSimulator();
-
-                        Console.WriteLine(@"Mode = " + _mode.ToString());
-                        //Mode = 0; typing
-                        if (_mode == 0)
-                        {
-                            Console.WriteLine(@"use Typing");
-                            //Send username
-                            input.Keyboard.TextEntry(user.Username);
-                            //Send tab
-                            input.Keyboard.Sleep(200);
-                            input.Keyboard.KeyDown(VirtualKeyCode.TAB);
-                            input.Keyboard.Sleep(150);
-                            input.Keyboard.KeyUp(VirtualKeyCode.TAB);
-                            //Send password
-                            input.Keyboard.Sleep(200);
-                            input.Keyboard.TextEntry(user.Password);
-                        }else if (_mode == 1)
-                        {
-                            Console.WriteLine(@"use Copy");
-                            //Copy and Paste username
-                            Clipboard.SetText(user.Username);
-                            input.Keyboard.KeyDown(VirtualKeyCode.CONTROL);
-                            input.Keyboard.Sleep(50);
-                            input.Keyboard.KeyDown(VirtualKeyCode.SHIFT);
-                            input.Keyboard.Sleep(50);
-                            input.Keyboard.KeyDown(VirtualKeyCode.INSERT);
-                            input.Keyboard.Sleep(50);
-                            input.Keyboard.KeyUp(VirtualKeyCode.CONTROL);
-                            input.Keyboard.Sleep(50);
-                            input.Keyboard.KeyUp(VirtualKeyCode.SHIFT);
-                            input.Keyboard.Sleep(50);
-                            input.Keyboard.KeyUp(VirtualKeyCode.INSERT);
-
-                            //Send tab
-                            input.Keyboard.Sleep(150);
-                            input.Keyboard.KeyDown(VirtualKeyCode.TAB);
-                            input.Keyboard.Sleep(50);
-                            input.Keyboard.KeyUp(VirtualKeyCode.TAB);
-                            input.Keyboard.Sleep(100);
-
-                            //Copy and Paste password
-                            Clipboard.SetText(user.Password);
-                            input.Keyboard.KeyDown(VirtualKeyCode.CONTROL);
-                            input.Keyboard.Sleep(50);
-                            input.Keyboard.KeyDown(VirtualKeyCode.SHIFT);
-                            input.Keyboard.Sleep(50);
-                            input.Keyboard.KeyDown(VirtualKeyCode.INSERT);
-                            input.Keyboard.Sleep(50);
-                            input.Keyboard.KeyUp(VirtualKeyCode.CONTROL);
-                            input.Keyboard.Sleep(50);
-                            input.Keyboard.KeyUp(VirtualKeyCode.SHIFT);
-                            input.Keyboard.Sleep(50);
-                            input.Keyboard.KeyUp(VirtualKeyCode.INSERT);
-                        }
-
-
-                        //Send enter login
-                        Console.WriteLine(_loginEnter);
-                        if( _loginEnter )
-                        {
-                            Console.WriteLine(@"Enter");
-                            input.Keyboard.Sleep(250);
-                            input.Keyboard.KeyPress(VirtualKeyCode.RETURN);
-                        }
+                        
+                        timerLogin.Enabled = false;
                     }
                 }
+                catch (Exception ex)
+                {
+                    // Handle exception ถ้า process ไม่พบ
+                    Console.WriteLine($"Error getting process: {ex.Message}");
+                }
+        
+                Console.WriteLine(@"TimerLogin Tick!" + DateTime.Now);
             }
-            else
-            {
-                timerLogin.Enabled = false;
-            }
-
-            Console.WriteLine(@"TimerLogin Tick!" + DateTime.Now);
         }
 
         private void checkBoxLoginEnter_CheckedChanged(object sender, EventArgs e)
